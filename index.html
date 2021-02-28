@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Vue</title>
+</head>
+<body>
+    <div id="app">
+        <blog-post v-for="post in posts" :key="post.$index" :post="post">
+        </blog-post>
+        <textarea v-model="title" v-on:keyup.enter="simpan"></textarea>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script>
+    Vue.component('blog-post',{
+        props:['post'],
+        template:`
+            <div id="app">
+            <button v-on:click="post.score += 1">+</button>
+            <p>{{post.title}} || {{post.date}} || Score : {{post.score}}</p>
+            <button v-on:click="post.score -= 1">-</button><br><br><br>
+            </div>
+`
+    });
+    var app=new Vue({
+        el:'#app',
+        data:{
+            title:'',
+            posts:[
+            {title:'komentar1',date:"2-28-2021",score:0},
+            {title:'komentar2',date:"2-28-2021",score:5},
+            {title:'komentar3',date:"2-28-2021",score:5}
+            ]
+        },
+        methods:{
+        simpan:function(){
+        this.posts.push({
+            title:this.title,
+            date:"2-28-2021",
+            score:0
+        })
+        } 
+        }
+    });
+</script>
+</body>
+</html>
