@@ -8,42 +8,19 @@
 </head>
 <body>
     <div id="app">
-            <input type="text" v-model="name">   
-            <button v-on:click="add" value="name">Add</button>       
-        <blog-post v-for="post in posts" :key="post.$index" :post="post">
-        </blog-post>
+        <form>
+            <input type="text" v-model="form.name">
+            <button @click.prevent="add" v-show="!updateSubmit" >Add</button>
+            <button @click.prevent="update(form)" v-show="updateSubmit">Update</button>
+        </form>
+    <ul v-for="(user, index) in users">
+        <li>
+            <span>{{user.name}}</span>
+            <button @click="edit(user,index)">Edit</button> || <button @click="del(index)">Delete</button>
+        </li>
+    </ul>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-<script>
-    Vue.component('blog-post',{
-        props:['post'],
-        template:`
-            <div id="app">
-            <p>{{post.name}}
-            <button @:click.enter='edit'>Edit</button> | <button @:click.enter='delete'>Delete</button>
-            </p>
-            </div>
-`
-    });
-    var app=new Vue({
-        el:'#app',
-        data:{
-            name:'',
-            posts:[
-            {name:'Muhammad Iqbal Mubarok'},
-            {name:'Ruby Purwanti'},
-            {name:'Faqih Muhammad'}
-            ]
-        },
-        methods:{
-        add:function(){
-        this.posts.push({
-            name:this.name
-        })
-        }
-        
-    }
-    });
-</script>
+    <script src="vue-script.js" charset="utf-8"></script>
+    <script src="quiz.js" charset="utf-8"></script>
 </body>
 </html>

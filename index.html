@@ -8,42 +8,20 @@
 </head>
 <body>
     <div id="app">
-        <blog-post v-for="post in posts" :key="post.$index" :post="post">
-        </blog-post>
-        <textarea v-model="title" v-on:keyup.enter="simpan"></textarea>
+     <ul>
+    <comments v-for="comment in comments" :comment="comment"></comments>
+     </ul>
+        <textarea v-model="comment_text" rows="8" cols="50" @keyup.enter="postComment"></textarea>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-<script>
-    Vue.component('blog-post',{
-        props:['post'],
-        template:`
-            <div id="app">
-            <button v-on:click="post.score += 1">+</button>
-            <p>{{post.title}} || {{post.date}} || Score : {{post.score}}</p>
-            <button v-on:click="post.score -= 1">-</button><br><br><br>
-            </div>
-`
-    });
-    var app=new Vue({
-        el:'#app',
-        data:{
-            title:'',
-            posts:[
-            {title:'komentar1',date:"2-28-2021",score:0},
-            {title:'komentar2',date:"2-28-2021",score:5},
-            {title:'komentar3',date:"2-28-2021",score:5}
-            ]
-        },
-        methods:{
-        simpan:function(){
-        this.posts.push({
-            title:this.title,
-            date:"2-28-2021",
-            score:0
-        })
-        } 
-        }
-    });
-</script>
+    <template id="comment-template">
+    <div>
+    <button type="button" v-on:click="tambah">+</button>
+    <div>{{comment.body}} || {{comment.time}} || Score : {{score}}</div>
+    <button type="button" @click="kurang">-</button>
+    <br><br>
+    </div>   
+    </template>
+    <script src="vue-script.js" charset="utf-8"></script>
+    <script src="index.js" charset="utf-8"></script>
 </body>
 </html>
